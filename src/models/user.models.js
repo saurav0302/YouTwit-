@@ -2,7 +2,6 @@ import mongoose, {Schema} from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import e from "express";
 
 const userSchema = new Schema(
     {
@@ -83,5 +82,6 @@ userSchema.methods.genrateRefreshToken = function() {
         process.env.REFRESH_TOKEN_SECRET, 
         {expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN});
 }
+
 
 export const User = mongoose.model("User", userSchema)
