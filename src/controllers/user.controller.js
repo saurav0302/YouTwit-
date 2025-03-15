@@ -1,6 +1,6 @@
 import asynchHandler from '../utils/asyncHandler.js';
 import ApiError from '../utils/ApiErrors.js';
-import uploadOnCloudinary from '../utils/Cloudinary.js';
+import{ uploadOnCloudinary, deleteFromCloudinary} from '../utils/Cloudinary.js';
 import { User } from '../models/user.models.js';
 import { ApiResponse } from '../utils/ApiResoponse.js';
 
@@ -259,6 +259,8 @@ const updateUserAvatar = asynchHandler(async (req, res) => {
         throw new ApiError(500, "Failed to upload avatar image");
     }
 
+    const oldUser = await User.findById(req.user._id);
+
     const user = await User.findByIdAndUpdate(req.user._id, {
         $set: {
             avatar: avatar.url
@@ -266,6 +268,11 @@ const updateUserAvatar = asynchHandler(async (req, res) => {
     }, {
         new: true
     }).select("-password");
+
+    if (oldUser.avatar) {
+        await deleteFromCloudinary(oldUser.avatar);
+    }
+    
 
     return res.status(200).json(new ApiResponse(200, user, "Avatar updated successfully"));
 });
@@ -281,6 +288,8 @@ const updateUserCoverImage = asynchHandler(async (req, res) => {
         throw new ApiError(500, "Failed to upload cover image");
     }
 
+    const oldUser = await User.findById(req.user._id);
+
     const user = await User.findByIdAndUpdate(req.user._id, {
         $set: {
             coverImage: coverImage.url
@@ -288,6 +297,11 @@ const updateUserCoverImage = asynchHandler(async (req, res) => {
     }, {
         new: true
     }).select("-password"); 
+
+    if (oldUser.avatar) {
+        await deleteFromCloudinary(oldUser.avatar);
+    }
+    
 
     return res.status(200).json(new ApiResponse(200, user, "Cover image updated successfully"));
 });
