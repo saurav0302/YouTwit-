@@ -3,6 +3,8 @@ import ApiError from '../utils/ApiErrors.js';
 import{ uploadOnCloudinary, deleteFromCloudinary} from '../utils/Cloudinary.js';
 import { User } from '../models/user.models.js';
 import { ApiResponse } from '../utils/ApiResoponse.js';
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 const genrateAccessTokenAndRefreshToken = async(userId) => {
     try {
@@ -307,11 +309,11 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 });
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
-    const username = req.params;
+    const username = req.params.username;
     if(!username?.trim()) {
         throw new ApiError(400, "Username is required");
     }
-
+    console.log('Username:', username);
     const channel = await User.aggregate([
         {
             $match: {
@@ -361,7 +363,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
             }
         }
     ]);
-
+    console.log('Channel Data:', channel); 
     if(!channel) {
         throw new ApiError(404, "Channel not found");
     }
