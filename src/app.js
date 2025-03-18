@@ -15,9 +15,13 @@ app.use(cookieParser()); // Parse cookies
 
 // Routes import
 import userRouter from './routers/user.routes.js';
+import videoRouter from './routers/video.routes.js';
+import subscriptionRouter from './routers/subscription.routes.js';
 
 // Routes
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/videos', videoRouter);
+app.use('/api/v1/subscriptions', subscriptionRouter);
 
 
 export default app;

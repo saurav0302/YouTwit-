@@ -1,7 +1,7 @@
 import asyncHandler from '../utils/asyncHandler.js';
 import ApiError from '../utils/ApiErrors.js';
 import{ uploadOnCloudinary, deleteFromCloudinary} from '../utils/Cloudinary.js';
-import { User } from '../models/user.models.js';
+import { User }  from '../models/user.models.js';
 import { ApiResponse } from '../utils/ApiResoponse.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
@@ -313,7 +313,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
     if(!username?.trim()) {
         throw new ApiError(400, "Username is required");
     }
-    console.log('Username:', username);
+    // console.log('Username:', username);
     const channel = await User.aggregate([
         {
             $match: {
