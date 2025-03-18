@@ -18,12 +18,15 @@ import userRouter from './routers/user.routes.js';
 import videoRouter from './routers/video.routes.js';
 import subscriptionRouter from './routers/subscription.routes.js';
 import tweetRoter from './routers/tweet.routes.js';
+import commentRouter from './routers/comment.routes.js';
+import playlistRouter from './routers/playlist.routes.js';
 
 // Routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/videos', videoRouter);
 app.use('/api/v1/subscriptions', subscriptionRouter);
 app.use('/api/v1/tweets', tweetRoter);
-
+app.use('/api/v1/comments', commentRouter);
+app.use('/api/v1/playlists', playlistRouter);
 
 export default app;
