@@ -20,6 +20,9 @@ import subscriptionRouter from './routers/subscription.routes.js';
 import tweetRoter from './routers/tweet.routes.js';
 import commentRouter from './routers/comment.routes.js';
 import playlistRouter from './routers/playlist.routes.js';
+import likeRouter from './routers/like.routes.js';
+import HealthRouter from './routers/healthcheck.routes.js';
+import DashboardRouter from './routers/dashboard.routes.js';
 
 // Routes
 app.use('/api/v1/users', userRouter);
@@ -28,5 +31,8 @@ app.use('/api/v1/subscriptions', subscriptionRouter);
 app.use('/api/v1/tweets', tweetRoter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/playlists', playlistRouter);
+app.use('/api/v1/likes', likeRouter);
+app.use('/api/v1/health', HealthRouter);
+app.use('/api/v1/dashboard', DashboardRouter);
 
 export default app;
